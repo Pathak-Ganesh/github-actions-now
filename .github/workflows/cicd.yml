@@ -1,38 +1,39 @@
 name: CICD
+
 on:
   workflow_dispatch:
     inputs:
       environments:
-        defaults: 'dev'
+        default: 'dev'
         required: true
         type: choice
         options:
           - dev
           - prod
-          - stagging
+          - staging
+
 jobs:
-  code
+  code:
     runs-on: ubuntu-latest
     steps: 
-      - name: checkout code
-      - run: echo "Code ran"
+      - name: code building
+        run: echo "Code ran"
 
-  build
+  build:
     runs-on: ubuntu-latest
     steps: 
-      - name: checkout code
-      - run: echo "Code build"
+      - name: building code
+        run: echo "Code build"
 
-  test
+  test:
     runs-on: ubuntu-latest
     steps: 
-      - name: checkout code
-      - run: echo "Code tested successfully"
+      - name: testing code
+        run: echo "Code tested successfully"
 
   deploy:
-    if: input s.environment == 'dev'
+    if: ${{ inputs.environments == 'dev' }}
     runs-on: ubuntu-latest
     steps: 
-      - name: checkout code
-      - run: echo "Code deployed"
-    
+      - name: deploying code
+        run: echo "Code deployed"
