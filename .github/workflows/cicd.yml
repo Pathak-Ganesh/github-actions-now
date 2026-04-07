@@ -1,0 +1,38 @@
+name: CICD
+on:
+  workflow_dispatch:
+    inputs:
+      environments:
+        defaults: 'dev'
+        required: true
+        type: choice
+        options:
+          - dev
+          - prod
+          - stagging
+jobs:
+  code
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout code
+      - run: echo "Code ran"
+
+  build
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout code
+      - run: echo "Code build"
+
+  test
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout code
+      - run: echo "Code tested successfully"
+
+  deploy:
+    if: input s.environment == 'dev'
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout code
+      - run: echo "Code deployed"
+    
